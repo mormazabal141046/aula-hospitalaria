@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh LpR lFr">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -12,31 +12,72 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Aula Hospitalaria
         </q-toolbar-title>
+        <q-chip color="blue-10" text-color="white" class="cursor-pointer">
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/img/avatar4.jpg">
+          </q-avatar>
+          Mauricio Ormazábal
+          <q-menu :offset="[0,15]">
+            <div class="row no-wrap q-pa-md">
+              <div class="column justify-between">
+                <div class="q-mb-xs"><b>Mauricio Ormazábal</b></div>
+                <div>
+                  <div class="text-caption">Coordinador</div>
+                  <div class="text-caption">mormazabal@duoc.cl</div>
+                </div>
+                  <q-btn color="secondary" label="Contraseña" unelevated size="sm"  class="q-mt-sm" @click="showModal = !showModal" v-close-popup />
+              </div>
+              <q-separator vertical inset class="q-mx-lg" />
 
-        <div>Quasar v{{ $q.version }}</div>
+              <div class="column items-center justify-between">
+                <div class="text-caption q-mb-xs"><b>PERFIL</b></div>
+
+                <q-avatar size="52px" class="q-mb-md">
+                  <img src="https://cdn.quasar.dev/img/avatar4.jpg">
+                </q-avatar>
+
+
+                <q-btn
+                  color="primary"
+                  label="Salir"
+                  unelevated
+                  size="sm"
+                  @click="logout"
+                  v-close-popup
+                />
+              </div>
+            </div>
+          </q-menu>
+        </q-chip>
       </q-toolbar>
     </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      bordered
+      content-class="bg-grey-1"
     >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+    <q-scroll-area style="height: calc(100% - 180px); margin-top: 180px; border-right: 1px solid #ddd;">
 
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
+      <q-list>
+        <!-- <q-separator spaced /> -->
+        <q-item-label header>Menú </q-item-label>
+        <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
       </q-list>
+    </q-scroll-area>
+
+      <q-img class="absolute-top" src="~assets/bkg-profile.png" style="height: 180px">
+          <div class="absolute-bottom bg-transparent">
+            <q-avatar size="56px" class="q-mb-sm">
+              <img src="https://cdn.quasar.dev/img/avatar4.jpg">
+            </q-avatar>
+            <div class="text-weight-bold">Mauricio Ormazábal</div>
+            <div>Coordinador</div>
+            <div>mormazabal@duoc.cl</div>
+          </div>
+        </q-img>
     </q-drawer>
 
     <q-page-container>
@@ -51,47 +92,47 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: 'Dashboard',
+    caption: 'Seguimiento',
+    icon: 'las la-grip-horizontal',
+    link: '/'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: 'Usuarios',
+    caption: 'Administración',
+    icon: 'las la-users',
+    link: '/users'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    title: 'Sedes',
+    caption: 'Administración',
+    icon: 'las la-university',
+    link: '/login'
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
+    title: 'Asignaturas',
+    caption: 'Administración',
+    icon: 'las la-book',
     link: 'https://forum.quasar.dev'
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
+    title: 'Carga Académica',
+    caption: 'Gestionar',
+    icon: 'las la-school',
     link: 'https://twitter.quasar.dev'
   },
   {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
+    title: 'Matriculas',
+    caption: 'Gestionar',
+    icon: 'las la-id-badge',
     link: 'https://facebook.quasar.dev'
   },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
+  // {
+  //   title: 'Quasar Awesome',
+  //   caption: 'Community Quasar projects',
+  //   icon: 'favorite',
+  //   link: 'https://awesome.quasar.dev'
+  // }
 ]
 
 export default defineComponent({
@@ -114,3 +155,10 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss">
+  .q-item__label--header{
+    padding: 1rem 2rem;
+
+  }
+</style>
