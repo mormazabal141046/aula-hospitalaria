@@ -10,22 +10,24 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-
-        <q-toolbar-title>
-          Aula Hospitalaria
+        <div class="module-name q-pl-md ellipsis">Aula Hospitalaria</div>
+        <q-toolbar-title class="text-center flex justify-center">
+          <div class="header-logo">
+            <img src="logo_aula.svg" alt="Logo">
+          </div>
         </q-toolbar-title>
         <q-chip color="blue-10" text-color="white" class="cursor-pointer">
           <q-avatar>
             <img src="https://cdn.quasar.dev/img/avatar4.jpg">
           </q-avatar>
-          Mauricio Ormazábal
+          {{ store.currentUser.name }} {{ store.currentUser.lastname }}
           <q-menu :offset="[0,15]">
             <div class="row no-wrap q-pa-md">
               <div class="column justify-between">
-                <div class="q-mb-xs"><b>Mauricio Ormazábal</b></div>
+                <div><b>{{ store.currentUser.name }} {{ store.currentUser.lastname }}</b></div>
                 <div>
-                  <div class="text-caption">Coordinador</div>
-                  <div class="text-caption">mormazabal@duoc.cl</div>
+                  <div class="text-caption">{{ store.currentUser.profile }}</div>
+                  <div class="text-caption">{{ store.currentUser.email }}</div>
                 </div>
                   <q-btn color="secondary" label="Contraseña" unelevated size="sm"  class="q-mt-sm" @click="showModal = !showModal" v-close-popup />
               </div>
@@ -64,18 +66,18 @@
       <q-list>
         <!-- <q-separator spaced /> -->
         <q-item-label header>Menú </q-item-label>
-        <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
+        <ListaMenu v-for="link in linksList" :key="link.title" :item="link" />
       </q-list>
     </q-scroll-area>
 
-      <q-img class="absolute-top" src="~assets/bkg-profile.png" style="height: 180px">
-          <div class="absolute-bottom bg-transparent">
+      <q-img class="absolute-top" src="~assets/bkg-profile-teal.png" style="height: 180px;">
+          <div class="absolute-bottom bg-transparent" style="padding: 1rem 2rem;">
             <q-avatar size="56px" class="q-mb-sm">
               <img src="https://cdn.quasar.dev/img/avatar4.jpg">
             </q-avatar>
-            <div class="text-weight-bold">Mauricio Ormazábal</div>
-            <div>Coordinador</div>
-            <div>mormazabal@duoc.cl</div>
+            <div class="text-weight-bold">{{ store.currentUser.name }} {{ store.currentUser.lastname }}</div>
+            <div>{{ store.currentUser.profile }}</div>
+            <div>{{ store.currentUser.email }}</div>
           </div>
         </q-img>
     </q-drawer>
@@ -86,11 +88,15 @@
   </q-layout>
 </template>
 
-<script>
-import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+<script setup>
+import { defineComponent, onMounted, ref } from 'vue'
+import ListaMenu from 'components/ListaMenu.vue'
+import { useUserStore } from '../stores/users'
+import { useQuasar, QSpinnerGrid } from 'quasar'
+import { useRouter } from 'vue-router'
 
-const linksList = [
+const router = useRouter()
+const linksList = ref([
   {
     title: 'Dashboard',
     caption: 'Seguimiento',
@@ -113,19 +119,19 @@ const linksList = [
     title: 'Asignaturas',
     caption: 'Administración',
     icon: 'las la-book',
-    link: 'https://forum.quasar.dev'
+    link: '/'
   },
   {
     title: 'Carga Académica',
     caption: 'Gestionar',
     icon: 'las la-school',
-    link: 'https://twitter.quasar.dev'
+    link: '/'
   },
   {
     title: 'Matriculas',
     caption: 'Gestionar',
     icon: 'las la-id-badge',
-    link: 'https://facebook.quasar.dev'
+    link: '/'
   },
   // {
   //   title: 'Quasar Awesome',
@@ -133,32 +139,71 @@ const linksList = [
   //   icon: 'favorite',
   //   link: 'https://awesome.quasar.dev'
   // }
-]
+])
+const leftDrawerOpen = ref(false)
+const timer = ref(null)
+const store = useUserStore();
+const $q = useQuasar()
 
-export default defineComponent({
+
+defineComponent({
   name: 'MainLayout',
-
   components: {
-    EssentialLink
+    ListaMenu
   },
+});
 
-  setup () {
-    const leftDrawerOpen = ref(false)
+onMounted(()=>{
+  console.log("MainLayout")
+  console.log("store", store)
+});
 
-    return {
-      linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
-})
+const toggleLeftDrawer = () => {
+  leftDrawerOpen.value = !leftDrawerOpen.value
+}
+const logout = async () => {
+  timer.value = setTimeout(() => {
+    $q.loading.show({
+        message: `
+            <div class="loading-app">
+                <b>Cerrando Sesión...</b>
+                <span>Hasta luego <b>${store.currentUser.name} ${store.currentUser.lastname}</b></span>
+            </div>`,
+        spinner: QSpinnerGrid,
+        html: true
+    })
+
+    timer.value = setTimeout( async () => {
+        await store.SIGN_OUT();
+        router.push({name: "login" });
+        $q.loading.hide()
+        timer.value = void 0
+    }, 1500)
+  }, 100)
+}
+
 </script>
 
 <style lang="scss">
+  .q-header{
+    background: #00a69b;
+  }
   .q-item__label--header{
-    padding: 1rem 2rem;
-
+    padding: 1rem 2rem 1rem 1rem;
+  }
+  .header-logo{
+    background: white;
+    padding: 3px 12px;
+    border-radius: 5px;
+    width: fit-content;
+  }
+  .header-logo img{
+    height: 20px;
+  }
+  .q-chip{
+    background: #068f85 !important;
+  }
+  .module-name{
+    font-size: 16px;
   }
 </style>

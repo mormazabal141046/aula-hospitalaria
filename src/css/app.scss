@@ -1,6 +1,23 @@
+:root{
+  --primary   : #003f86;
+  --secondary : #ed7131;
+  --accent    : #9fc958;
+  --quaternary: #B1418D;
+  --tertiary  : #00a69b;
+  --text-color  : #2e2e2e;
+
+}
 // app global css in SCSS form
 *{
   font-family: "Poppins", sans-serif;
-
-
+}
+.ntfy-custom{
+  border-radius: 10px;
+}
+.loading-app{
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 22px;
 }

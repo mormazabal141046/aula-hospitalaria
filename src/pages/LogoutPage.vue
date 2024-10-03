@@ -6,12 +6,12 @@
 
 <script setup>
   import { defineComponent, onMounted } from 'vue'
-  import { useLoginStore } from '../stores/login'
+  import { useUserStore } from '../stores/users'
   defineComponent({
     name:"LogoutPage"
   })
 
-  const store = useLoginStore();
+  const store = useUserStore();
   onMounted(()=>{
     console.log("LogoutPage", store.currentUser)
 
