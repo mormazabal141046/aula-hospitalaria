@@ -19,7 +19,10 @@ const routes = [
     meta: { authorize: true },
     children: [
       { path: '/', component: () => import('pages/IndexPage.vue'), name: 'app'},
-      { path: '/users', component: () => import('pages/UsersPage.vue'), name: 'users' }
+      { path: '/users', component: () => import('pages/UsersPage.vue'), name: 'users' },
+      { path: '/carga', component: () => import('pages/CargaAcademica.vue'), name: 'carga' },
+      { path: '/asignaturas', component: () => import('pages/Asignaturas.vue'), name: 'asignaturas' },
+      { path: '/matriculas', component: () => import('pages/Matriculas.vue'), name: 'matriculas' },
     ]
   },
 
