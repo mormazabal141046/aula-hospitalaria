@@ -19,7 +19,8 @@ const routes = [
     meta: { authorize: true },
     children: [
       { path: '/', component: () => import('pages/IndexPage.vue'), name: 'app'},
-      { path: '/users', component: () => import('pages/UsersPage.vue'), name: 'users' }
+      { path: '/users', component: () => import('pages/UsersPage.vue'), name: 'users' },
+      { path: '/enrolments', component: () => import('pages/EnrolmentPage.vue'), name: 'enrolments' },
     ]
   },
 

@@ -2,20 +2,14 @@
   <q-layout view="lHh LpR lFr">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
         <div class="module-name q-pl-md ellipsis">Aula Hospitalaria</div>
         <q-toolbar-title class="text-center flex justify-center">
           <div class="header-logo">
             <img src="logo_aula.svg" alt="Logo">
           </div>
         </q-toolbar-title>
+        <q-toggle v-model="dark_mode" color="teal-10" checked-icon="o_dark_mode"  unchecked-icon="o_light_mode"  dense class="q-mr-md"  @update:model-value="$q.dark.toggle()" />
         <q-chip color="blue-10" text-color="white" class="cursor-pointer">
           <q-avatar>
             <img src="https://cdn.quasar.dev/img/avatar4.jpg">
@@ -39,7 +33,6 @@
                 <q-avatar size="52px" class="q-mb-md">
                   <img src="https://cdn.quasar.dev/img/avatar4.jpg">
                 </q-avatar>
-
 
                 <q-btn
                   color="primary"
@@ -93,13 +86,14 @@ import { defineComponent, onMounted, ref } from 'vue'
 import ListaMenu from 'components/ListaMenu.vue'
 import { useUserStore } from '../stores/users'
 import { useQuasar, QSpinnerGrid } from 'quasar'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
+const route = useRoute()
 const linksList = ref([
   {
     title: 'Dashboard',
-    caption: 'Seguimiento',
+    caption: 'Administrador',
     icon: 'las la-grip-horizontal',
     link: '/'
   },
@@ -119,19 +113,19 @@ const linksList = ref([
     title: 'Asignaturas',
     caption: 'Administración',
     icon: 'las la-book',
-    link: '/'
+    link: '/enrolments'
   },
   {
     title: 'Carga Académica',
     caption: 'Gestionar',
     icon: 'las la-school',
-    link: '/'
+    link: '/enrolments'
   },
   {
     title: 'Matriculas',
     caption: 'Gestionar',
     icon: 'las la-id-badge',
-    link: '/'
+    link: '/enrolments'
   },
   // {
   //   title: 'Quasar Awesome',
@@ -144,7 +138,7 @@ const leftDrawerOpen = ref(false)
 const timer = ref(null)
 const store = useUserStore();
 const $q = useQuasar()
-
+const dark_mode = ref(false)
 
 defineComponent({
   name: 'MainLayout',
@@ -155,8 +149,10 @@ defineComponent({
 
 onMounted(()=>{
   console.log("MainLayout")
+  console.log("MainLayout route", route)
   console.log("store", store)
 });
+
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value
@@ -181,6 +177,7 @@ const logout = async () => {
     }, 1500)
   }, 100)
 }
+
 
 </script>
 

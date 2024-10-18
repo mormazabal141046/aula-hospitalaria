@@ -94,7 +94,7 @@ import ModalUser from "src/components/Users/ModalUser.vue";
 import ModalUserDetail from "src/components/Users/ModalUserDetail.vue";
 import ModalConfirm from "src/components/Users/ModalConfirm.vue";
 import { QSpinnerGears, date, useQuasar } from 'quasar'
-import { defineComponent, ref, onMounted, computed } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import { useUserStore } from '../stores/users'
 const $q = useQuasar()
 
@@ -570,9 +570,10 @@ const formatDate = (date_at) =>{
     //   box-shadow: 0px 3px 6px #00000029;
 }
 
-.refresh-data :deep(.q-btn__wrapper) {
+.refresh-data  {
+// .refresh-data :deep(.q-btn__wrapper) {
     padding: 5px 5px 3px 5px !important;
-    background: #4757b3;
+    // background: #4757b3;
     color: white;
     font-weight: 400;
 }
