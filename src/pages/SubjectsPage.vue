@@ -6,8 +6,7 @@
       class="text-grey"
       active-color="primary"
       indicator-color="primary"
-      align="justify"
-      narrow-indicator
+      align="justify"     narrow-indicator
     >
     <template v-for="(item, i) in tabs" :key="i">
       <q-tab  :name="item.name" :label="item.label" />
@@ -19,15 +18,15 @@
     <q-separator />
 
     <q-tab-panels v-model="tab" animated>
-      <q-tab-panel name="new_enrolment">
+      <q-tab-panel name="new_subject">
         <div class="text-h6 q-pb-md">{{titleTab}}</div>
-        <NewEnrolment></NewEnrolment>
+        <NewSubject></NewSubject>
       </q-tab-panel>
 
-      <q-tab-panel name="list_enrolments">
+      <q-tab-panel name="list_subjects">
         <div class="text-h6 q-pb-md">{{titleTab}}</div>
         <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. -->
-        <ListEnrolments></ListEnrolments>
+        <ListSubjects></ListSubjects>
       </q-tab-panel>
     </q-tab-panels>
   </div>
@@ -35,26 +34,26 @@
 
 <script setup>
 import { defineComponent, ref, computed } from "vue";
-import NewEnrolment from "src/components/Enrolments/NewEnrolment.vue";
-import ListEnrolments from "src/components/Enrolments/ListEnrolments.vue";
+import NewSubject from "src/components/Subjects/NewSubject.vue";
+import ListSubjects from "src/components/Subjects/ListSubjects.vue";
 
 defineComponent({
-  name:"EnrolmentPage",
-  components: [NewEnrolment]
+  name:"SubjectsPage",
+  components: ['NewSubject', 'ListSubjects']
 })
 const tabs = ref([
   {
-    name: "new_enrolment",
-    label:"Nueva Matricula",
+    name: "new_subject",
+    label:"Nueva Asignatura",
     active: true,
   },
   {
-    name: "list_enrolments",
-    label:"Consultar Matriculas",
+    name: "list_subjects",
+    label:"Lista Asignaturas",
     panel:""
   }
 ])
-const tab = ref('new_enrolment')
+const tab = ref('new_subject')
 const titleTab = computed(()=>{
   return tabs.value.find( item => item.name === tab.value ).label
 })

@@ -1,23 +1,161 @@
 :root{
-  --primary   : #003f86;
-  --secondary : #ed7131;
-  --accent    : #9fc958;
-  --quaternary: #B1418D;
-  --tertiary  : #00a69b;
-  --text-color  : #2e2e2e;
+   --primary   : #003f86;
+   --secondary : #ed7131;
+   --accent    : #9fc958;
+   --quaternary: #B1418D;
+   --tertiary  : #00a69b;
+   --text-color  : #2e2e2e;
 
 }
 // app global css in SCSS form
 *{
-  font-family: "Poppins", sans-serif;
+   font-family: "Poppins", sans-serif;
 }
 .ntfy-custom{
-  border-radius: 10px;
+   border-radius: 10px;
 }
 .loading-app{
-  display: flex;
-  justify-content:center;
-  align-items: center;
-  flex-direction: column;
-  font-size: 22px;
+   display: flex;
+   justify-content:center;
+   align-items: center;
+   flex-direction: column;
+   font-size: 22px;
+}
+
+.gap-0{
+   gap: 0px;
+}
+.gap-4{
+   gap: 4px;
+}
+.gap-8{
+   gap: 8px;
+}
+.gap-16{
+   gap: 16px;
+}
+.gap-24{
+   gap: 24px;
+}
+.gap-32{
+   gap: 32px;
+}
+.gap-64{
+   gap: 64px;
+}
+
+@media (min-width: 0px) {
+   .gap-xs-0{
+      gap: 0px;
+   }
+   .gap-xs-4{
+      gap: 4px;
+   }
+   .gap-xs-8{
+      gap: 8px;
+   }
+   .gap-xs-16{
+      gap: 16px;
+   }
+   .gap-xs-24{
+      gap: 24px;
+   }
+   .gap-xs-32{
+      gap: 32px;
+   }
+   .gap-xs-64{
+      gap: 64px;
+   }
+}
+@media (min-width: 600px) {
+   .gap-sm-0{
+      gap: 0px;
+   }
+   .gap-sm-4{
+      gap: 4px;
+   }
+   .gap-sm-8{
+      gap: 8px;
+   }
+   .gap-sm-16{
+      gap: 16px;
+   }
+   .gap-sm-24{
+      gap: 24px;
+   }
+   .gap-sm-32{
+      gap: 32px;
+   }
+   .gap-sm-64{
+      gap: 64px;
+   }
+}
+@media (min-width: 1024px) {
+   .gap-md-0{
+      gap: 0px;
+   }
+   .gap-md-4{
+      gap: 4px;
+   }
+   .gap-md-8{
+      gap: 8px;
+   }
+   .gap-md-16{
+      gap: 16px;
+   }
+   .gap-md-24{
+      gap: 24px;
+   }
+   .gap-md-32{
+      gap: 32px;
+   }
+   .gap-md-64{
+      gap: 64px;
+   }
+}
+@media (min-width: 1440px) {
+   .gap-lg-0{
+      gap: 0px;
+   }
+   .gap-lg-4{
+      gap: 4px;
+   }
+   .gap-lg-8{
+      gap: 8px;
+   }
+   .gap-lg-16{
+      gap: 16px;
+   }
+   .gap-lg-24{
+      gap: 24px;
+   }
+   .gap-lg-32{
+      gap: 32px;
+   }
+   .gap-lg-64{
+      gap: 64px;
+   }
+}
+@media (min-width: 1920px) {
+   .gap-xl-0{
+      gap: 0px;
+   }
+   .gap-xl-4{
+      gap: 4px;
+   }
+   .gap-xl-8{
+      gap: 8px;
+   }
+   .gap-xl-16{
+      gap: 16px;
+   }
+   .gap-xl-24{
+      gap: 24px;
+   }
+   .gap-xl-32{
+      gap: 32px;
+   }
+   .gap-xl-64{
+      gap: 64px;
+   }
 }

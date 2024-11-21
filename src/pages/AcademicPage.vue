@@ -39,7 +39,7 @@ import NewEnrolment from "src/components/Enrolments/NewEnrolment.vue";
 import ListEnrolments from "src/components/Enrolments/ListEnrolments.vue";
 
 defineComponent({
-  name:"EnrolmentPage",
+  name:"AcademicPage",
   components: [NewEnrolment]
 })
 const tabs = ref([
@@ -54,7 +54,7 @@ const tabs = ref([
     panel:""
   }
 ])
-const tab = ref('new_enrolment')
+const tab = ref('list_enrolments')
 const titleTab = computed(()=>{
   return tabs.value.find( item => item.name === tab.value ).label
 })

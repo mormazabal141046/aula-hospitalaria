@@ -13,7 +13,7 @@
 
   const store = useUserStore();
   onMounted(()=>{
-    console.log("LogoutPage", store.currentUser)
+   //  console.log("LogoutPage", store.currentUser)
 
   })
 

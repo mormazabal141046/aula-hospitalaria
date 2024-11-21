@@ -5,6 +5,8 @@
         <div class="flex justify-end avatar-dialog">
           <q-avatar :icon="textContentDialog.icon" style="background: #0b123e;" text-color="white" size="5em" />
         </div>
+        {{ kiu }}
+        <q-btn @click="kiu = 'Nola'">asdasdasd</q-btn>
         <div>
           <div class="text-h6">{{textContentDialog.title}}</div>
           {{textContentDialog.subtitle}}
@@ -25,53 +27,90 @@
             size="lg"
           />
         </div>
-        <q-select v-model="props.userModel.profile" class="q-mt-md" emit-value :options="profiles" :rules="[val => validInput(val,'profile')]" color="indigo-6" dropdown-icon="keyboard_arrow_down" label="Perfil" filled dense>
-          <template v-slot:prepend>
-            <q-icon name="o_workspace_premium" />
-          </template>
-        </q-select>
-        <q-input v-model="props.userModel.name" :rules="[val => validInput(val,'name')]" color="indigo-6" filled class="q-mt-xs" label="Nombre" dense>
-          <template v-slot:prepend>
-            <q-icon name="person_outline" />
-          </template>
-        </q-input>
-        <q-input v-model="props.userModel.lastname" :rules="[val => validInput(val,'lastname')]" color="indigo-6" filled class="q-mt-xs" label="Apellido" dense>
-          <template v-slot:prepend>
-            <q-icon name="person_outline" />
-          </template>
-        </q-input>
-        <q-input v-model="props.userModel.email" :rules="[val => validEmail(val)]" :disable="!disableControlEdit" :readonly="!disableControlEdit" color="indigo-6"  filled class="q-mt-xs" label="Email" dense type="email">
-          <template v-slot:prepend>
-            <q-icon name="mail_outline" />
-          </template>
-        </q-input>
-        <div class="flex justify-between items-center content-center">
-          <q-input  v-model="props.userModel.password" :type="isPwd ? 'password' : 'text'"  color="indigo-6" filled class="q-mt-xs" label="Contraseña" dense>
+        <div class="flex row" style="gap :16px;">
+          <q-select v-model="props.userModel.profile" class="q-mt-md col-6" emit-value :options="profiles" :rules="[val => validInput(val,'profile')]" color="indigo-6" dropdown-icon="keyboard_arrow_down" label="Rol" filled dense>
             <template v-slot:prepend>
-              <q-icon name="o_vpn_key" />
+              <q-icon name="o_workspace_premium" />
             </template>
-            <template v-slot:append>
-              <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
+          </q-select>
+        </div>
+        <div class="flex row" style="gap :16px;">
+          <q-input v-model="props.userModel.name" :rules="[val => validInput(val,'name')]" color="indigo-6" filled class="q-mt-xs col" label="RUT" dense>
+            <template v-slot:prepend>
+              <q-icon name="person_outline" />
             </template>
           </q-input>
-          <q-btn icon="o_content_copy" unelevated class="bg-indigo-6" color="white" size="md" dense padding="6px sm"   @click="copyPassword" />
-          <div>
-            <q-tooltip v-model="copy" anchor="bottom end" self="top middle" content-class="bg-indigo">
-              Copiado!
-            </q-tooltip>
-          </div>
-          <q-btn label="Generar" unelevated class="bkg-text-admin" color="indigo" outline @click="props.randomPassword"></q-btn>
+          <q-input v-model="props.userModel.lastname" :rules="[val => validInput(val,'lastname')]" type="date" color="indigo-6" filled class="q-mt-xs col" label="Fecha de Nacimiento" dense>
+            <template v-slot:prepend>
+              <q-icon name="person_outline" />
+            </template>
+          </q-input>
         </div>
-        <!-- <q-select v-model="userModel.modulesSelected" class="q-mt-xs" :options="modules" :disable="disableByCustomer" multiple use-chips :rules="[val => validInput(val, 'modules')]" color="indigo-6" dropdown-icon="keyboard_arrow_down" label="Módulos" filled dense @input="setModulesUser(userModel.userprofile)">
+        <q-input v-model="props.userModel.name" :rules="[val => validInput(val,'name')]" color="indigo-6" filled class="q-mt-xs" label="Nombres" dense>
           <template v-slot:prepend>
-            <q-icon name="o_space_dashboard" />
+            <q-icon name="person_outline" />
           </template>
-        </q-select>
-        <q-select v-if="existModulePoi" v-model="userModel.poisSelected" :options="pois" multiple use-chips :rules="[val => validInput(val,'pois')]" color="indigo-6" dropdown-icon="keyboard_arrow_down" label="Puntos de Interés" filled dense @input="setPoisUser()">
-          <template v-slot:prepend>
-            <q-icon name="polyline" />
-          </template>
-        </q-select> -->
+        </q-input>
+        <div class="flex row" style="gap :16px;">
+          <q-input v-model="props.userModel.lastname" :rules="[val => validInput(val,'lastname')]" color="indigo-6" filled class="q-mt-xs col" label="Apellido Paterno" dense>
+            <template v-slot:prepend>
+              <q-icon name="person_outline" />
+            </template>
+          </q-input>
+          <q-input v-model="props.userModel.lastname" :rules="[val => validInput(val,'lastname')]" color="indigo-6" filled class="q-mt-xs col" label="Apellido Materno" dense>
+            <template v-slot:prepend>
+              <q-icon name="person_outline" />
+            </template>
+          </q-input>
+        </div>
+        <div class="flex row" style="gap :16px;">
+
+          <q-input v-model="props.userModel.email" :rules="[val => validEmail(val)]" :disable="!disableControlEdit" :readonly="!disableControlEdit" color="indigo-6"  filled class="q-mt-xs col" label="Email" dense type="email">
+            <template v-slot:prepend>
+              <q-icon name="mail_outline" />
+            </template>
+          </q-input>
+          <q-input v-model="props.userModel.lastname" :rules="[val => validInput(val,'lastname')]" color="indigo-6" filled class="q-mt-xs col" label="Teléfono" dense>
+            <template v-slot:prepend>
+              <q-icon name="person_outline" />
+            </template>
+          </q-input>
+        </div>
+        <div class="flex row" style="gap :16px;">
+          <q-select v-model="props.userModel.profile" class="q-mt-xs col" emit-value :options="profiles" :rules="[val => validInput(val,'profile')]" color="indigo-6" dropdown-icon="keyboard_arrow_down" label="Región" filled dense>
+            <template v-slot:prepend>
+              <q-icon name="o_workspace_premium" />
+            </template>
+          </q-select>
+          <q-select v-model="props.userModel.profile" class="q-mt-xs col" emit-value :options="profiles" :rules="[val => validInput(val,'profile')]" color="indigo-6" dropdown-icon="keyboard_arrow_down" label="Comuna" filled dense>
+            <template v-slot:prepend>
+              <q-icon name="o_workspace_premium" />
+            </template>
+          </q-select>
+        </div>
+
+        <div class="flex row justify-between items-center content-center q-pt-md">
+          <div class="flex col items-stretch" style="gap :16px;">
+            <q-input  v-model="props.userModel.password" :type="isPwd ? 'password' : 'text'"  color="indigo-6" filled class="q-mt-none" label="Contraseña" dense>
+              <template v-slot:prepend>
+                <q-icon name="o_vpn_key" />
+              </template>
+              <template v-slot:append>
+                <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
+              </template>
+            </q-input>
+            <q-btn icon="o_content_copy" unelevated class="bg-indigo-6" color="white" size="sm" dense padding="4px sm"   @click="copyPassword">
+              <q-tooltip v-model="copy" anchor="bottom end" self="top middle" content-class="bg-indigo">
+                Copiar
+              </q-tooltip>
+            </q-btn>
+            <q-btn label="Generar" unelevated class="bkg-text-admin" color="indigo" outline @click="props.randomPassword"></q-btn>
+          </div>
+          <!-- <div class="col-5">
+          </div> -->
+        </div>
+
+
       </q-card-section>
       <q-card-actions align="right" class="q-pa-md q-px-lg bg-white text-indigo-8">
         <q-btn padding="sm lg" flat label="Cancelar" @click="closeModal()" />
@@ -83,10 +122,23 @@
 
 <script setup>
 import { copyToClipboard } from 'quasar'
-import { defineComponent, onMounted, ref, computed } from 'vue'
+import { defineComponent, onMounted, ref, computed, inject} from 'vue'
 
 defineComponent({
   name:"ModalUser"
+})
+const kiu = inject("kiu")
+const user = ref({
+  role: "",
+  rut:"",
+  birthday:"",
+  names:"",
+  lastname:"",
+  surname:"",
+  email:"",
+  phone:"",
+  region:"",
+  commune:""
 })
 
 const props = defineProps({
@@ -123,9 +175,6 @@ const props = defineProps({
     default: () => {}
   }
 })
-
-
-
 const isPwd = ref(false)
 const copy = ref(false)
 const profiles = ref([
@@ -138,7 +187,7 @@ const profiles = ref([
 ])
 
 const textContentDialog = computed(()=>{
-  console.log("textContentDialog", props.modalMode.value);
+//   console.log("textContentDialog", props.modalMode.value);
   return props.modalMode == 'create' ?
   {
     title: 'Nuevo Usuario',
@@ -157,7 +206,7 @@ const visibleControl = computed(()=>{
   return props.modalMode == 'create' ? true : false
 })
 const disableControl = computed(()=>{
-  console.log("disableControl", props.checkInputs);
+//   console.log("disableControl", props.checkInputs);
   let state = Object.values(props.checkInputs).every( item => item == true)
   return !state
 })
@@ -176,7 +225,7 @@ const existModulePoi = computed(()=>{
 })
 
 onMounted(() =>{
-  console.log("onMounted Modal User",props.modalMode.value);
+//   console.log("onMounted Modal User",props.modalMode.value);
   if(props.modalMode == "edit"){
     validAllInputs()
   }else{
@@ -231,7 +280,8 @@ const copyPassword = () => {
 <style>
 .dialog-admin{
   border-radius: 12px !important;
-  width: 500px;
+  width: 700px;
+  max-width: 700px !important;
   background: #1c2559;
 }
 .avatar-dialog{

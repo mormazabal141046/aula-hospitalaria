@@ -2,7 +2,7 @@
   <q-page>
     <q-table :rows="rows" :columns="columns" row-key="name" class="table-admin" table-class="table-admin" :pagination="pagination" separator="none" rows-per-page-label="Resultados por Página"
       no-results-label="No hay Usuarios Registrados" no-data-label="No hay Datos Disponibles"
-      :pagination-label="getPaginationLabel" :loading="loading" loading-label="Cargando Listado de Usuarios..."
+      :pagination-label="getPaginationLabel" :loading="loading" loading-label="Cargando Listado de Asignaturas..."
     >
     <template v-slot:top-right>
       <!-- <div class="flex full-width justify-start items-center content-center  q-col-gutter-sm"> -->
@@ -12,12 +12,12 @@
         <div class="flex column q-ml-none q-mt-xs col">
           <div class="text-overline q-pl-sm q-pb-sm" style="color:white;">Filtros</div>
           <div class="flex row" style="gap:16px">
-            <q-select v-model="model" :options="communes" label="Sede" label-color="grey-1" dropdown-icon="expand_more"  class="custom-select col" dense rounded outlined>
+            <!-- <q-select v-model="model" :options="communes" label="Nivel Curso" label-color="grey-1" dropdown-icon="expand_more"  class="custom-select col" dense rounded outlined>
               <template v-slot:prepend>
                 <q-icon name="o_foundation" />
               </template>
-            </q-select>
-            <q-select v-model="model" :options="communes" label="Curso" label-color="grey-1" dropdown-icon="expand_more" class="custom-select col" dense rounded outlined>
+            </q-select> -->
+            <q-select v-model="model" :options="communes" label="Curso" label-color="grey-1" dropdown-icon="expand_more" class="custom-select col-4" dense rounded outlined>
               <template v-slot:prepend>
                 <q-icon name="o_upgrade" />
               </template>
@@ -26,8 +26,8 @@
         </div>
         <div class="flex row q-ml-none q-mt-xs col items-end justify-end" style="gap:16px">
 
-          <q-input v-model="filter" filled dense debounce="300" clear-icon="o_backspace" clearable
-              color="indigo-6" placeholder="Buscar: Nombre, apellido, etc.">
+          <q-input v-model="filter" filled dense debounce="300" clear-icon="o_backspace" class="col-6" clearable
+              color="indigo-6" placeholder="Buscar: Asignatura, Nivel, Estado, etc.">
             <template v-slot:prepend>
               <q-icon name="person_search" color="" />
             </template>
@@ -57,7 +57,7 @@ const columns = ref([
         name: "name",
         icon: "fa-solid fa-grip-lines",
         align: "center",
-        label: "Nombres",
+        label: "Asignatura",
         field: "name",
         sortable: true,
     },
@@ -65,7 +65,7 @@ const columns = ref([
         name: "lastname",
         icon: "r_alternate_email",
         align: "center",
-        label: "Apellido Paterno",
+        label: "Nivel Curso",
         field: "lastname",
         sortable: true,
     },
@@ -73,7 +73,7 @@ const columns = ref([
         name: "course",
         icon: "o_switch_account",
         align: "center",
-        label: "Curso",
+        label: "Fecha Creación",
         field: "course",
         sortable: true,
     },
@@ -81,16 +81,8 @@ const columns = ref([
         name: "headquarters",
         icon: "o_switch_account",
         align: "center",
-        label: "Sede",
+        label: "Docentes Asociados",
         field: "headquarters",
-        sortable: true,
-    },
-    {
-        name: "created_at",
-        icon: "event_available",
-        align: "center",
-        label: "Fecha Matricula",
-        field: "created_at",
         sortable: true,
     },
     {
