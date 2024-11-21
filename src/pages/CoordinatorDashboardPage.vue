@@ -41,7 +41,7 @@ const form = ref({
 const lorem = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.')
 
 const sedes = computed(()=>{
-   return store.headquarters.filter(item => item.id < 3)
+   return store.headquarters.filter(item => item.id < 2)
 })
 onMounted(() => {
    // store.GET_ALL_HEADQUARTERS();

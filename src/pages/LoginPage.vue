@@ -7,7 +7,7 @@
          <h6 class="q-my-none">Iniciar Sesión</h6>
          <div class="caption text-center">Bienvenido al Aula Virtual</div>
          </div>
-
+         {{ positionGEO }}
          <div class="q-gutter-y-lg q-mt-lg">
 
          <q-input rounded outlined  v-model="email" label="Email" >
@@ -43,18 +43,37 @@
    const store = useUserStore();
    const $q = useQuasar()
 
-   const email = ref("mormazabalm91@gmail.com");
-   const password = ref("asdasd");
+   const email = ref("");
+   const password = ref("");
    const show_password = ref(false)
    const isLoading = ref(false)
+   const positionGEO = ref("");
    const timer = ref(null)
    // const accept = ref(true);
-
+   const onSuccess = (position)=>{
+      positionGEO.value = position
+      alert('Latitude: '          + position.coords.latitude          + '\n' +
+              'Longitude: '         + position.coords.longitude         + '\n' +
+              'Altitude: '          + position.coords.altitude          + '\n' +
+              'Accuracy: '          + position.coords.accuracy          + '\n' +
+              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+              'Heading: '           + position.coords.heading           + '\n' +
+              'Speed: '             + position.coords.speed             + '\n' +
+              'Timestamp: '         + position.timestamp                + '\n');
+   }
+   const onError = ()=>{
+      alert('code: '    + error.code    + '\n' +
+      'message: ' + error.message + '\n');
+   }
    defineComponent({
       name:"LoginPage"
    })
    onMounted(()=>{
       // console.log("LoginPage", store.currentUser)
+      document.addEventListener("deviceready", ()=>{
+         console.log("deviceready");
+         navigator.geolocation.getCurrentPosition(onSuccess(), onError());
+      }, false);
    })
    onBeforeUnmount( () => {
       if (timer.value !== void 0) {
