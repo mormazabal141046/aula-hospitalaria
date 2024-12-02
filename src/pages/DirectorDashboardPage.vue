@@ -42,10 +42,23 @@ const lorem = ref('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
 
 onMounted(() => {
    // store.GET_ALL_HEADQUARTERS();
+   kiu();
 })
 const goToDetail = async (route)=>{
    router.push({ name: "aula", params: { value: route.value }});
    return
+}
+const kiu = async ()=>{
+
+   let miInicializador = { method: 'GET',
+   headers:{
+      "Content-Type": "application/json"
+},
+                        mode: 'cors',
+                        cache: 'default' };
+    fetch('http://localhost:8000/api/administrativo/sedes',miInicializador)
+   .then(response => response.json())
+   .then(data => console.log(data));
 }
 </script>
 

@@ -2233,6 +2233,14 @@ export const useGlobalStore = defineStore('global', {
       //Sedes
       async GET_ALL_HEADQUARTERS() {
          // console.log("Kiub");
+         // fetch(this.apiURL+'api/administrativo/sedes',{
+         //    headers:{
+         //             "Access-Control-Allow-Origin": "*",
+         //             "Content-Type": "application/json"
+         //          }
+         // })
+         // .then(response => response.json())
+         // .then(data => console.log(data));
          try {
             axios.get(this.apiURL+'api/administrativo/sedes',{
                headers:{
@@ -2245,7 +2253,7 @@ export const useGlobalStore = defineStore('global', {
                // console.log(e);
             });
          } catch (error) {
-            // console.log("catch",e);
+            console.log("catch",e);
          }
       },
       async GET_HEADQUARTERS_BY_ID(id) {
